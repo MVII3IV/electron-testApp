@@ -1,0 +1,29 @@
+{
+  "name": "vm-emulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "electron": "electron .",
+    "electron-build": "ng build --prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MVII3IV/html-default-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MVII3IV/html-default-template/issues"
+  },
+  "homepage": "https://github.com/MVII3IV/html-default-template#readme",
+  "dependencies": {
+    "electron": "^1.7.10",
+    "electron-reload": "^1.2.2",
+    "jquery": "^3.2.1",
+    "ws": "^3.3.3"
+  },
+  "devDependencies": {
+    "electron-packager": "^10.1.0"
+  }
+}

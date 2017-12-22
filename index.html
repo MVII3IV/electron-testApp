@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" ng-controller="mainController">
+
+<!-- Mirrored from webapplayers.com/luna_admin-v1.3/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Dec 2017 19:50:16 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <base href="./">
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900' rel='stylesheet' type='text/css'>
+
+    <!-- Page title -->
+    <title>VME | Virtual Machine Emulator {{version}}</title>
+
+    <!-- Vendor styles -->
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/vendor/animate.css/animate.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css" />
+
+    <!-- App styles -->
+    <link rel="stylesheet" href="assets/styles/pe-icons/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="assets/styles/pe-icons/helper.css" />
+    <link rel="stylesheet" href="assets/styles/stroke-icons/style.css" />
+    <link rel="stylesheet" href="assets/styles/style.css">
+
+    <style>
+         ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+         ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+         ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Wrapper-->
+    <div class="wrapper">
+
+        <!-- Header-->
+        <nav class="navbar navbar-default navbar-fixed-top" ng-if="false">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div id="mobile-menu">
+                        <div class="left-nav-toggle">
+                            <a href="#">
+                                <i class="stroke-hamburgermenu"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <a class="navbar-brand" href="index.html">
+                        VME
+                        <span>{{version}}</span>
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <div class="left-nav-toggle">
+                        <a href="#">
+                            <i class="stroke-hamburgermenu"></i>
+                        </a>
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="min-btn">
+                            <a style="
+        padding-top: 5px;
+        padding-bottom: 0px;
+        padding-right: 0px;
+    ">
+                                <span class="pe-7s-angle-down" style="font-size:50px"></span>
+                            </a>
+
+                        </li>
+                        <li id="close-btn">
+                            <a style="
+        padding-bottom: 0px;
+        padding-top: 5px;
+        padding-right: 5px;
+        padding-left: 0px;
+    ">
+                                <span class="pe-7s-close" style="font-size:50px"></span>
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End header-->
+
+        <!-- Navigation-->
+        <aside class="navigation no" style="position:fixed; margin-top: 0px;">
+            <nav>
+                <ul class="nav luna-nav">
+                    <li class="nav-category">
+                        Main
+                    </li>
+                    <li class="active">
+                        <a href="">Emulator</a>
+                    </li>
+
+
+                    <li class="nav-info">
+                        <i class="pe pe-7s-shield text-accent"></i>
+
+                        <div class="m-t-xs">
+                            <span class="c-white">VME</span>
+                            WebSocket client to test new features designed for the Production Automation Center
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- End navigation-->
+
+
+        <!-- Main content-->
+        <section class="content" style="
+        margin-top: 0px;
+    ">
+            <div class="container-fluid">
+
+                <div class="row" style="position:sticky">
+                    <div class="col-lg-12">
+                        <div class="view-header">
+                            <div class="pull-right text-right" style="line-height: 14px">
+                                <small>Virtual Machine
+                                    <br>Emulator
+                                    <br>
+                                    <span class="c-white">{{version}}</span>
+                                </small>
+                            </div>
+                            <div class="header-icon">
+                                <i class="pe page-header-icon pe-7s-monitor"></i>
+                            </div>
+                            <div class="header-title">
+                                <h3 class="m-b-xs">VME</h3>
+                                <small>
+                                    A virtual machine emulator for PAC features testing purposes
+                                </small>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="panel panel-filled">
+                            <div class="panel-heading panel-toggle">
+                                <div class="view-header">
+                                    <div class="pull-right text-right" style="line-height: 14px; padding-top: 20px;">
+                                        <a class="">
+                                            <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <i class="pe page-header-icon pe-7s-plug"></i>
+                                    </div>
+                                    <div class="header-title">
+                                        <h3>Conection Settings</h3>
+                                        <small>
+                                            <code> Websocket server url: {{server.url}}</code>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body" style="display: block;">
+
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Your PC Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="virtualHost" ng-change="updateURL()">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">PAC Server</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" ng-model="server.name" ng-change="updateURL()">
+                                        </div>
+
+                                        <label class="col-sm-2 control-label">PAC Port</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" ng-model="server.port" ng-change="updateURL()">
+                                        </div>
+                                    </div>
+
+                                    <div class="pull-right">
+                                        <button class="btn btn-w-md btn-warning" ng-click="open()">Connect</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="panel panel-filled">
+                            <div class="panel-heading panel-toggle">
+                                <div class="view-header">
+                                    <div class="pull-right text-right" style="line-height: 14px; padding-top: 20px;">
+                                        <a class="">
+                                            <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <i class="pe page-header-icon pe-7s-comment"></i>
+                                    </div>
+                                    <div class="header-title">
+                                        <h3>Message Emulation</h3>
+                                        <small>
+                                            Websocket message selection
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body" style="display: block;">
+
+                                <div class="form-horizontal">
+                                    <div class="form-group" ng-if="false">
+                                        <label class="col-sm-2 control-label">VM Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="virtualHost">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Message Type</label>
+
+                                        <div class="col-sm-10">
+                                            <select class="select2_demo_1 form-control select2-hidden-accessible" ng-model="selectedMessage" ng-options="message.name for message in messages">
+                                                <option value="" disabled>Select a message</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="pull-right">
+                                        <button class="btn btn-w-md btn-warning" ng-click="sendMessage(selectedMessage, selectedMessage.payload)">Send Message</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-filled">
+                            <div class="panel-heading panel-toggle">
+                                <div class="view-header">
+                                    <div class="pull-right text-right" style="line-height: 14px; padding-top: 20px;">
+                                        <a class="">
+                                            <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                    </div>
+                                    <div class="header-icon">
+                                        <i class="pe page-header-icon pe-7s-browser"></i>
+                                    </div>
+                                    <div class="header-title">
+                                        <h3>Output console</h3>
+                                        <small>
+                                            Server message listener
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body" style="background-color:#24262d;display: block;font-family: Menlo, Monaco, Consolas, monospace;"
+                                id="output">
+                                <br>
+                                <p ng-repeat="outputMessage in outputMessages track by $index">{{outputMessage}}</p>
+
+                            </div>
+                            <div class="panel-footer" style="height: 52px;">
+                                <div class="pull-right">
+                                    <button class="btn btn-w-md btn-warning" ng-click="clearLog()">Clear Log</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+    </section>
+    <!-- End main content-->
+
+
+    </div>
+
+
+
+    <!-- End wrapper-->
+
+    <!-- Vendor scripts -->
+    <script>
+        if (typeof module === 'object') {
+            window.module = module;
+            module = undefined;
+        }
+    </script>
+
+    <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="assets/vendor/pacejs/pace.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/toastr/toastr.min.js"></script>
+    <script src="assets/vendor/sparkline/index.js"></script>
+    <script src="assets/scripts/menuHandler.js"></script>
+    <script src="assets/scripts/angularApp/app.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+
+
+            $('#output').css("overflow-y", "scroll");
+            $('#output').css("height", "150px");
+            $('.panel-body').slideToggle(0)
+            $('.panel-footer').slideToggle(0)
+
+            // Handle minimalize left menu
+            $('.left-nav-toggle a').on('click', function (event) {
+                event.preventDefault();
+                $("body").toggleClass("nav-toggle");
+            });
+
+
+            // Hide all open sub nav menu list
+            $('.nav-second').on('show.bs.collapse', function () {
+                $('.nav-second.in').collapse('hide');
+            });
+
+
+            // Handle panel toggle
+            $('.panel-toggle').on('click', function (event) {
+                event.preventDefault();
+                var hpanel = $(event.target).closest('div.panel');
+                var icon = $(event.target).closest('i');
+                var body = hpanel.find('div.panel-body');
+                var footer = hpanel.find('div.panel-footer');
+                body.slideToggle(300);
+                footer.slideToggle(200);
+
+                // Toggle icon from up to down
+                icon.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+                hpanel.toggleClass('').toggleClass('panel-collapse');
+                setTimeout(function () {
+                    hpanel.resize();
+                    hpanel.find('[id^=map-]').resize();
+                }, 50);
+            });
+
+            // Handle panel close
+            $('.panel-close').on('click', function (event) {
+                event.preventDefault();
+                var hpanel = $(event.target).closest('div.panel');
+                hpanel.remove();
+            });
+        });
+    </script>
+
+    <script>
+        if (window.module) module = window.module;
+    </script>
+
+
+</body>
+
+</html>
